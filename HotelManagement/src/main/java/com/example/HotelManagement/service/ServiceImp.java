@@ -8,4 +8,10 @@ public interface ServiceImp {
     List<HotelManagement> getCustomers();
 
     public HotelManagement addCustomer(HotelManagement hotelManagement);
+
+
+
+    HotelManagement deleteCustomer(int customerId);
+
+    HotelManagement updateCustomer(int customerId, HotelManagement hotelManagement);
 }
