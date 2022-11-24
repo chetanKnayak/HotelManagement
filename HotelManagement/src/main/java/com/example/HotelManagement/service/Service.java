@@ -27,24 +27,9 @@ public class Service implements ServiceImp {
 
     }
 
-    /*@Override
-    public HotelManagement updateCustomer(HotelManagement hotelManagement) {
-        return null;
-    }
-*/
-   /* @Override
-    public HotelManagement updateCustomer(HotelManagement hotelManagement) {
-
-        customerList.stream().filter(hotelManagement1 -> hotelManagement1.getCustomerId() == hotelManagement.getCustomerId()).forEach(hotelManagement1 -> {
-            hotelManagement1.setCustomerAddress(hotelManagement.getCustomerAddress());
-            hotelManagement1.setCustomerName(hotelManagement.getCustomerName());
-        });
-        return hotelManagement;
-    }*/
-
 
     @Override
-    public HotelManagement deleteCustomer(int customerId) {
+    public HotelManagement deletecustomer(int customerId) {
         HotelManagement hotelManagement2 = null;
         for (HotelManagement hotelManagement : customerList)
             if (hotelManagement.getCustomerId() == customerId) {
@@ -56,7 +41,7 @@ public class Service implements ServiceImp {
 
     }
 
-    public HotelManagement updateCustomer(int customerId, HotelManagement hotelManagement) {
+    public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) {
         HotelManagement hotelManagement2 = null;
         for (HotelManagement hotelManagement1 : customerList)
             if(hotelManagement1.getCustomerId()==customerId){

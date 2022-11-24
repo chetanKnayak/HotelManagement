@@ -27,13 +27,14 @@ public class HotelController {
     public HotelManagement addCustomer(@RequestBody HotelManagement hotelManagement){
        return this.serviceImp.addCustomer(hotelManagement);
     }
-  @PutMapping("/update/{customerId}")
-    public HotelManagement updateCustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement){
-       return this.serviceImp.updateCustomer(customerId,hotelManagement);
-  }
+    @PutMapping("/Customer/{customerId}")
+    public HotelManagement updatecustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement)
+    {
+        return this.serviceImp.updatecustomer(customerId,hotelManagement);
+    }
   @DeleteMapping("/delete/{customerId}")
-    public HotelManagement deleteCustomer(@PathVariable int customerId ){
-       return this.serviceImp.deleteCustomer(customerId);
+    public HotelManagement deletecustomer(@PathVariable int customerId ){
+       return this.serviceImp.deletecustomer(customerId);
 
   }
 

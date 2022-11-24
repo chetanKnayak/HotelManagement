@@ -11,7 +11,7 @@ public interface ServiceImp {
 
 
 
-    HotelManagement deleteCustomer(int customerId);
+    HotelManagement deletecustomer(int customerId);
 
-    HotelManagement updateCustomer(int customerId, HotelManagement hotelManagement);
+    HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement);
 }
