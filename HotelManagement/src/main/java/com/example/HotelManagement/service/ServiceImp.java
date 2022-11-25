@@ -7,11 +7,13 @@ import java.util.List;
 public interface ServiceImp {
     List<HotelManagement> getCustomers();
 
-    public HotelManagement addCustomer(HotelManagement hotelManagement);
+     String addCustomer(HotelManagement hotelManagement);
 
 
 
     HotelManagement deletecustomer(int customerId);
 
     HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement);
+
+
 }

@@ -19,12 +19,17 @@ public class HotelController {
     public List<HotelManagement> getCustomers(){
         return this.serviceImp.getCustomers();
     }
-   /* @PostMapping("/add"){
-        public HotelManagement addCustomer(@RequestBody HotelManagement hotelManagement){
-            return this.serviceImp.addCustomer(hotelManagement);
-        }*/
+   /* @GetMapping("/hotel")
+    public List<HotelManagement> getHotelName(){
+        return this.serviceImp.getHotelName();
+    }
+    @GetMapping("/payment")
+    public List<HotelManagement> getpaymentMethod(){
+        return this.serviceImp.getpaymentMethod();
+    }*/
+
    @PostMapping("/add")
-    public HotelManagement addCustomer(@RequestBody HotelManagement hotelManagement){
+    public String addCustomer(@RequestBody HotelManagement hotelManagement){
        return this.serviceImp.addCustomer(hotelManagement);
     }
     @PutMapping("/Customer/{customerId}")

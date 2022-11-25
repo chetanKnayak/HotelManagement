@@ -2,9 +2,20 @@ package com.example.HotelManagement.entites;
 
 public class HotelManagement {
 
+    private String hotelName;
     private int customerId;
+
     private String customerName;
-    private String customerAddress;
+    private int customerNumber;
+    private String paymentMethod;
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -22,29 +33,41 @@ public class HotelManagement {
         this.customerName = customerName;
     }
 
-    public String getCustomerAddress() {
-        return customerAddress;
+    public int getCustomerNumber() {
+        return customerNumber;
     }
 
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
+    public void setCustomerNumber(int customerNumber) {
+        this.customerNumber = customerNumber;
     }
 
-    public HotelManagement(int customerId, String customerName, String customerAddress) {
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public HotelManagement() {
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     @Override
     public String toString() {
         return "HotelManagement{" +
-                "customerId=" + customerId +
+                "hotelName='" + hotelName + '\'' +
+                ", customerId=" + customerId +
                 ", customerName='" + customerName + '\'' +
-                ", customerAddress='" + customerAddress + '\'' +
+                ", customerNumber=" + customerNumber +
+                ", paymentMethod='" + paymentMethod + '\'' +
                 '}';
+    }
+
+    public HotelManagement(String hotelName, int customerId, String customerName, int customerNumber, String paymentMethod) {
+        this.hotelName = hotelName;
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerNumber = customerNumber;
+        this.paymentMethod = paymentMethod;
+    }
+
+    public HotelManagement() {
     }
 }

@@ -1,6 +1,8 @@
 package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
+import com.example.HotelManagement.validation.Validation;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +11,12 @@ import java.util.List;
 public class Service implements ServiceImp {
 
     List<HotelManagement> customerList = new ArrayList<>();
+    @Autowired
+    Validation validation;
 
     public Service() {
-        customerList.add(new HotelManagement(1, "abc", "xyz"));
-        customerList.add(new HotelManagement(4, "chetan", "kar"));
+        customerList.add(new HotelManagement("Grand", 1, "chetan",1234, "Online"));
+      customerList.add(new HotelManagement("grand",2,"kumar",567,"online"));
     }
 
     @Override
@@ -21,9 +25,11 @@ public class Service implements ServiceImp {
     }
 
     @Override
-    public HotelManagement addCustomer(HotelManagement hotelManagement) {
+    public String addCustomer(HotelManagement hotelManagement) {
+        if (validation.validateName(hotelManagement.getCustomerName()))
+            return "enter valid name";
         customerList.add(hotelManagement);
-        return hotelManagement;
+        return "customer added";
 
     }
 
@@ -33,7 +39,7 @@ public class Service implements ServiceImp {
         HotelManagement hotelManagement2 = null;
         for (HotelManagement hotelManagement : customerList)
             if (hotelManagement.getCustomerId() == customerId) {
-                hotelManagement2= hotelManagement;
+                hotelManagement2 = hotelManagement;
                 customerList.remove(hotelManagement);
                 break;
             }
@@ -44,16 +50,19 @@ public class Service implements ServiceImp {
     public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) {
         HotelManagement hotelManagement2 = null;
         for (HotelManagement hotelManagement1 : customerList)
-            if(hotelManagement1.getCustomerId()==customerId){
+            if (hotelManagement1.getCustomerId() == customerId) {
 
-              hotelManagement1.setCustomerName(hotelManagement.getCustomerName());
-              hotelManagement1.setCustomerAddress(hotelManagement.getCustomerAddress());
-             // hotelManagement1.setCustomerId(customerId);
-              hotelManagement2=hotelManagement1;
-              break;
+                hotelManagement1.setCustomerName(hotelManagement.getCustomerName());
+                hotelManagement1.setCustomerNumber(hotelManagement.getCustomerNumber());
+                hotelManagement1.setHotelName(hotelManagement.getHotelName());
+                hotelManagement1.setPaymentMethod(hotelManagement.getPaymentMethod());
+                hotelManagement2 = hotelManagement1;
+                break;
             }
 
         return hotelManagement2;
     }
+
+
 
 }
