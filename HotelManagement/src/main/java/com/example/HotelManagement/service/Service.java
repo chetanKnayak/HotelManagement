@@ -28,6 +28,8 @@ public class Service implements ServiceImp {
     public String addCustomer(HotelManagement hotelManagement) {
         if (validation.validateName(hotelManagement.getCustomerName()))
             return "enter valid name";
+        if (validation.validateNumber(hotelManagement.getCustomerNumber()))
+            return "enter 10 digit number";
         customerList.add(hotelManagement);
         return "customer added";
 

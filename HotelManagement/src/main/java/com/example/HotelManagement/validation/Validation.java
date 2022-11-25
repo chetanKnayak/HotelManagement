@@ -11,6 +11,10 @@ public class Validation {
     public Boolean validateName(String name){
         return name.length()<3;
     }
+    public Boolean validateNumber(long number){
+        String number1= String.valueOf(number);
+        return number1.length()!=10;
+    }
 
 
 
