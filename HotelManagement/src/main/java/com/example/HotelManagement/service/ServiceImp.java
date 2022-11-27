@@ -2,14 +2,14 @@ package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
 import com.example.HotelManagement.exception.CustomException;
-import com.example.HotelManagement.exception.NumberException;
+import com.example.HotelManagement.exception.NoDataException;
 
 import java.util.List;
 
 public interface ServiceImp {
     List<HotelManagement> getCustomers();
 
-     String addCustomer(HotelManagement hotelManagement) throws CustomException, NumberException;
+     String addCustomer(HotelManagement hotelManagement) throws CustomException, NoDataException;
 
 
 

@@ -17,5 +17,9 @@ public class ExceptionHandlers {
     public ResponseEntity<String> myMessage(NumberException n){
         return new ResponseEntity<>(n.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler({NoDataException.class})
+    public ResponseEntity<String> myMessage(NoDataException nde){
+        return new ResponseEntity<>(nde.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }
