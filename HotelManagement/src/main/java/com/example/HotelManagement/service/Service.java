@@ -56,7 +56,7 @@ public class Service implements ServiceImp {
         return hotelManagement2;
 
     }
-
+//exceptions added
     public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws CustomException, NoDataException {
         HotelManagement hotelManagement2 = null;
 
