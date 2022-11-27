@@ -2,6 +2,7 @@ package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
 import com.example.HotelManagement.exception.CustomException;
+import com.example.HotelManagement.exception.NumberException;
 import com.example.HotelManagement.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,21 +27,23 @@ public class Service implements ServiceImp {
     }
 
     @Override
-    public String addCustomer(HotelManagement hotelManagement) throws CustomException {
+    public String addCustomer(HotelManagement hotelManagement) throws CustomException, NumberException {
         if (validation.validateName(hotelManagement.getCustomerName()))
             //return "enter valid name";
-            throw new CustomException("Enter valid Name");
+            throw new CustomException();
         hotelManagement.setCustomerName(hotelManagement.getCustomerName());
 
-        if (validation.validateNumber(hotelManagement.getCustomerNumber()))
-          //  return "enter 10 digit number";
-            throw new CustomException("Enter Valid Number");
-        customerList.add(hotelManagement);
-        return "customer added";
+
+            if (validation.validateNumber(hotelManagement.getCustomerNumber()))
+                //  return "enter 10 digit number";
+               // hotelManagement.setCustomerNumber(hotelManagement.getCustomerNumber());
+                throw new NumberException();
+            customerList.add(hotelManagement);
+            return "customer added";
+
+
 
     }
-
-
     @Override
     public HotelManagement deletecustomer(int customerId) {
         HotelManagement hotelManagement2 = null;
