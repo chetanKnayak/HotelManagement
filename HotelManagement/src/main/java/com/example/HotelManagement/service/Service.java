@@ -1,6 +1,7 @@
 package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
+import com.example.HotelManagement.exception.CustomException;
 import com.example.HotelManagement.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,11 +26,15 @@ public class Service implements ServiceImp {
     }
 
     @Override
-    public String addCustomer(HotelManagement hotelManagement) {
+    public String addCustomer(HotelManagement hotelManagement) throws CustomException {
         if (validation.validateName(hotelManagement.getCustomerName()))
-            return "enter valid name";
+            //return "enter valid name";
+            throw new CustomException("Enter valid Name");
+        hotelManagement.setCustomerName(hotelManagement.getCustomerName());
+
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
-            return "enter 10 digit number";
+          //  return "enter 10 digit number";
+            throw new CustomException("Enter Valid Number");
         customerList.add(hotelManagement);
         return "customer added";
 
