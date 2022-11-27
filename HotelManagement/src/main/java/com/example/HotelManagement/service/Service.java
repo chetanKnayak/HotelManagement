@@ -32,12 +32,12 @@ public class Service implements ServiceImp {
             throw new NoDataException("Blank Field not allowed");
         if (validation.validateName(hotelManagement.getCustomerName()))
             //return "enter valid name";
-            throw new CustomException("Enter valid Name");
+            throw new CustomException("enter valid name");
         hotelManagement.setCustomerName(hotelManagement.getCustomerName());
 
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
           //  return "enter 10 digit number";
-            throw new CustomException("Enter Valid Number");
+            throw new CustomException("enter valid number");
         customerList.add(hotelManagement);
         return "customer added";
 
@@ -57,9 +57,11 @@ public class Service implements ServiceImp {
 
     }
 
-    public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) {
+    public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws CustomException, NoDataException {
         HotelManagement hotelManagement2 = null;
+
         for (HotelManagement hotelManagement1 : customerList)
+
             if (hotelManagement1.getCustomerId() == customerId) {
 
                 hotelManagement1.setCustomerName(hotelManagement.getCustomerName());
@@ -69,6 +71,16 @@ public class Service implements ServiceImp {
                 hotelManagement2 = hotelManagement1;
                 break;
             }
+        if (validation.validateNumber(hotelManagement.getCustomerNumber()))
+            //  return "enter 10 digit number";
+            throw new CustomException("enter valid number");
+
+        if(hotelManagement.getCustomerName()=="")
+            throw new NoDataException("Blank Field not allowed");
+        if (validation.validateName(hotelManagement.getCustomerName()))
+            //return "enter valid name";
+            throw new CustomException("enter valid name");
+        hotelManagement.setCustomerName(hotelManagement.getCustomerName());
 
         return hotelManagement2;
     }

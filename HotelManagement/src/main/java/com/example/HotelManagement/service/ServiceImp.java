@@ -15,7 +15,7 @@ public interface ServiceImp {
 
     HotelManagement deletecustomer(int customerId);
 
-    HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement);
+    HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws CustomException, NoDataException;
 
 
 }

@@ -39,7 +39,7 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
        return this.serviceImp.addCustomer(hotelManagement);
     }
     @PutMapping("/Customer/{customerId}")
-    public HotelManagement updatecustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement)
+    public HotelManagement updatecustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement) throws Exception
     {
         logger.trace("Put Method Accessed");
         return this.serviceImp.updatecustomer(customerId,hotelManagement);
