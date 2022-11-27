@@ -41,10 +41,12 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
     @PutMapping("/Customer/{customerId}")
     public HotelManagement updatecustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement)
     {
+        logger.trace("Put Method Accessed");
         return this.serviceImp.updatecustomer(customerId,hotelManagement);
     }
   @DeleteMapping("/delete/{customerId}")
     public HotelManagement deletecustomer(@PathVariable int customerId ){
+       logger.trace("Delete Method Accessed");
        return this.serviceImp.deletecustomer(customerId);
 
   }
