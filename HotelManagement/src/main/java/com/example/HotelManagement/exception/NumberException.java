@@ -4,6 +4,6 @@ public class NumberException  extends Exception{
 
 
     public NumberException() {
-        super("Enter Valid Number");
+        super("Enter 10 digit number");
     }
 }

@@ -3,6 +3,7 @@ package com.example.HotelManagement.service;
 import com.example.HotelManagement.entites.HotelManagement;
 import com.example.HotelManagement.exception.CustomException;
 import com.example.HotelManagement.exception.NoDataException;
+import com.example.HotelManagement.exception.NumberException;
 import com.example.HotelManagement.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,9 +28,12 @@ public class Service implements ServiceImp {
     }
 
     @Override
-    public String addCustomer(HotelManagement hotelManagement) throws CustomException, NoDataException {
+    public String addCustomer(HotelManagement hotelManagement) throws CustomException,NoDataException,NumberException {
         if(hotelManagement.getCustomerName()=="")
-            throw new NoDataException("Blank Field not allowed");
+            throw new NoDataException("ERROR : Customer name cannot be blank");
+        if(hotelManagement.getHotelName()=="")
+            throw new NoDataException("ERROR : Hotel Name cannot be blank");
+
         if (validation.validateName(hotelManagement.getCustomerName()))
             //return "enter valid name";
             throw new CustomException();
@@ -37,7 +41,7 @@ public class Service implements ServiceImp {
 
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
           //  return "enter 10 digit number";
-            throw new CustomException();
+            throw new NumberException();
         customerList.add(hotelManagement);
         return "customer added";
 
@@ -84,7 +88,5 @@ public class Service implements ServiceImp {
 
         return hotelManagement2;
     }
-
-
 
 }
