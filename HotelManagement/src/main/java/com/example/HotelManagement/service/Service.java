@@ -16,10 +16,10 @@ public class Service implements ServiceImp {
     @Autowired
     Validation validation;
 
-    public Service() {
+    /*public Service() {
         customerList.add(new HotelManagement("Grand", 1, "chetan",1234, "Online"));
       customerList.add(new HotelManagement("grand",2,"kumar",567,"online"));
-    }
+    }*/
 
     @Override
     public List<HotelManagement> getCustomers() {
@@ -32,12 +32,12 @@ public class Service implements ServiceImp {
             throw new NoDataException("Blank Field not allowed");
         if (validation.validateName(hotelManagement.getCustomerName()))
             //return "enter valid name";
-            throw new CustomException("enter valid name");
+            throw new CustomException();
         hotelManagement.setCustomerName(hotelManagement.getCustomerName());
 
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
           //  return "enter 10 digit number";
-            throw new CustomException("enter valid number");
+            throw new CustomException();
         customerList.add(hotelManagement);
         return "customer added";
 
@@ -51,7 +51,7 @@ public class Service implements ServiceImp {
             if (hotelManagement.getCustomerId() == customerId) {
                 hotelManagement2 = hotelManagement;
                 customerList.remove(hotelManagement);
-                break;
+               // break;
             }
         return hotelManagement2;
 
@@ -69,17 +69,17 @@ public class Service implements ServiceImp {
                 hotelManagement1.setHotelName(hotelManagement.getHotelName());
                 hotelManagement1.setPaymentMethod(hotelManagement.getPaymentMethod());
                 hotelManagement2 = hotelManagement1;
-                break;
+               // break;
             }
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
             //  return "enter 10 digit number";
-            throw new CustomException("enter valid number");
+            throw new CustomException();
 
         if(hotelManagement.getCustomerName()=="")
             throw new NoDataException("Blank Field not allowed");
         if (validation.validateName(hotelManagement.getCustomerName()))
             //return "enter valid name";
-            throw new CustomException("enter valid name");
+            throw new CustomException();
         hotelManagement.setCustomerName(hotelManagement.getCustomerName());
 
         return hotelManagement2;
