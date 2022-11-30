@@ -1,7 +1,7 @@
 package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
-import com.example.HotelManagement.exception.CustomException;
+import com.example.HotelManagement.exception.ValidData;
 import com.example.HotelManagement.exception.NoDataException;
 import com.example.HotelManagement.exception.NumberException;
 import com.example.HotelManagement.validation.Validation;
@@ -27,27 +27,40 @@ public class Service implements ServiceImp {
         return customerList;
     }
 
+    /**
+     *
+     * @param hotelManagement
+     * @return
+     * @throws ValidData
+     * @throws NoDataException
+     * @throws NumberException
+     */
     @Override
-    public String addCustomer(HotelManagement hotelManagement) throws CustomException,NoDataException,NumberException {
+    public String addCustomer(HotelManagement hotelManagement) throws ValidData,NoDataException,NumberException {
         if(hotelManagement.getCustomerName()=="")
             throw new NoDataException("ERROR : Customer name cannot be blank");
+
         if(hotelManagement.getHotelName()=="")
             throw new NoDataException("ERROR : Hotel Name cannot be blank");
 
         if (validation.validateName(hotelManagement.getCustomerName()))
-            //return "enter valid name";
-            throw new CustomException();
-        hotelManagement.setCustomerName(hotelManagement.getCustomerName());
+
+            throw new ValidData("Enter valid Name");
+
 
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
-          //  return "enter 10 digit number";
-            throw new NumberException();
+            throw new NumberException("enter 10 digit number");
+
         customerList.add(hotelManagement);
         return "customer added";
 
     }
 
-
+    /**
+     *
+     * @param customerId
+     * @return
+     */
     @Override
     public HotelManagement deletecustomer(int customerId) {
         HotelManagement hotelManagement2 = null;
@@ -55,13 +68,22 @@ public class Service implements ServiceImp {
             if (hotelManagement.getCustomerId() == customerId) {
                 hotelManagement2 = hotelManagement;
                 customerList.remove(hotelManagement);
-               // break;
+               //break;
             }
         return hotelManagement2;
 
     }
-//exceptions added
-    public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws CustomException, NoDataException {
+
+    /**
+     *
+     * @param customerId
+     * @param hotelManagement
+     * @return
+     * @throws ValidData
+     * @throws NoDataException
+     * @throws NumberException
+     */
+    public HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws ValidData, NoDataException, NumberException {
         HotelManagement hotelManagement2 = null;
 
         for (HotelManagement hotelManagement1 : customerList)
@@ -75,16 +97,18 @@ public class Service implements ServiceImp {
                 hotelManagement2 = hotelManagement1;
                // break;
             }
+
         if (validation.validateNumber(hotelManagement.getCustomerNumber()))
             //  return "enter 10 digit number";
-            throw new CustomException();
+            throw new NumberException("enter 10 digit number");
 
         if(hotelManagement.getCustomerName()=="")
             throw new NoDataException("Blank Field not allowed");
+
         if (validation.validateName(hotelManagement.getCustomerName()))
             //return "enter valid name";
-            throw new CustomException();
-        hotelManagement.setCustomerName(hotelManagement.getCustomerName());
+            throw new ValidData("Enter valid Name");
+
 
         return hotelManagement2;
     }

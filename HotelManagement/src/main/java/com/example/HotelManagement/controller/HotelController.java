@@ -17,36 +17,32 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
     @Autowired
     private ServiceImp serviceImp;
 
-
+    /**
+     *
+     * @return
+     */
     @GetMapping("/Customer")
     public List<HotelManagement> getCustomers(){
-        logger.trace("Method Accessed");
+        logger.info("Method Accessed");
         return this.serviceImp.getCustomers();
     }
-   /* @GetMapping("/hotel")
-    public List<HotelManagement> getHotelName(){
-        return this.serviceImp.getHotelName();
-    }
-    @GetMapping("/payment")
-    public List<HotelManagement> getpaymentMethod(){
-        return this.serviceImp.getpaymentMethod();
-    }*/
+
 
    @PostMapping("/add")
-   @ResponseStatus
+
     public String addCustomer(@RequestBody HotelManagement hotelManagement) throws Exception{
-       logger.trace("Post Method Accessed");
+       logger.info("Post Method Accessed");
        return this.serviceImp.addCustomer(hotelManagement);
     }
     @PutMapping("/Customer/{customerId}")
     public HotelManagement updatecustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement) throws Exception
     {
-        logger.trace("Put Method Accessed");
+        logger.info("Put Method Accessed");
         return this.serviceImp.updatecustomer(customerId,hotelManagement);
     }
   @DeleteMapping("/delete/{customerId}")
     public HotelManagement deletecustomer(@PathVariable int customerId ){
-       logger.trace("Delete Method Accessed");
+       logger.info("Delete Method Accessed");
        return this.serviceImp.deletecustomer(customerId);
 
   }
