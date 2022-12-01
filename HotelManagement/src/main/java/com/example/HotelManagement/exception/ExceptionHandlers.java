@@ -20,5 +20,10 @@ public class ExceptionHandlers {
         return new ResponseEntity<>(n.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler({DataAlreadyPresentException.class})
+    public ResponseEntity<String> myMessage(DataAlreadyPresentException n){
+        return new ResponseEntity<>(n.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+
 
 }
