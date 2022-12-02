@@ -2,6 +2,7 @@ package com.example.HotelManagement.entites;
 
 public class HotelManagement {
 
+
     private String hotelName;
     private int customerId;
 

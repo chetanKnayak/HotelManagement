@@ -1,9 +1,7 @@
 package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
-import com.example.HotelManagement.exception.DataAlreadyPresentException;
-import com.example.HotelManagement.exception.ValidDataException;
-import com.example.HotelManagement.exception.NumberException;
+import com.example.HotelManagement.exception.*;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ public interface ServiceImp {
 
 
 
-    HotelManagement deletecustomer(int customerId);
+    HotelManagement deletecustomer(int customerId) throws DataNotPresentException, EmptyListException;
 
     HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws ValidDataException, NumberException;
 

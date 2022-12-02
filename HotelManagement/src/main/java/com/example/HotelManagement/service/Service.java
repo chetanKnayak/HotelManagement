@@ -1,9 +1,7 @@
 package com.example.HotelManagement.service;
 
 import com.example.HotelManagement.entites.HotelManagement;
-import com.example.HotelManagement.exception.DataAlreadyPresentException;
-import com.example.HotelManagement.exception.ValidDataException;
-import com.example.HotelManagement.exception.NumberException;
+import com.example.HotelManagement.exception.*;
 import com.example.HotelManagement.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,7 +48,9 @@ public class Service implements ServiceImp {
      * @return
      */
     @Override
-    public HotelManagement deletecustomer(int customerId) {
+    public HotelManagement deletecustomer(int customerId) throws DataNotPresentException, EmptyListException {
+        if(customerList.isEmpty())
+            throw new EmptyListException("List is Empty");
         HotelManagement hotelManagement2 = null;
         for (HotelManagement hotelManagement : customerList)
             if (hotelManagement.getCustomerId() == customerId) {
@@ -58,6 +58,8 @@ public class Service implements ServiceImp {
                 customerList.remove(hotelManagement);
                 break;
             }
+        else
+            throw new DataNotPresentException("Given Customer ID does not exist");
         return hotelManagement2;
 
     }

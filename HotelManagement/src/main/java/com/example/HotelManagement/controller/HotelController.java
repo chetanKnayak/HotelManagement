@@ -2,6 +2,8 @@ package com.example.HotelManagement.controller;
 
 
 import com.example.HotelManagement.entites.HotelManagement;
+import com.example.HotelManagement.exception.DataNotPresentException;
+import com.example.HotelManagement.exception.EmptyListException;
 import com.example.HotelManagement.service.ServiceImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +43,7 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
         return this.serviceImp.updatecustomer(customerId,hotelManagement);
     }
   @DeleteMapping("/delete/{customerId}")
-    public HotelManagement deletecustomer(@PathVariable int customerId ){
+    public HotelManagement deletecustomer(@PathVariable int customerId ) throws DataNotPresentException, EmptyListException {
        logger.info("Delete Method Accessed");
        return this.serviceImp.deletecustomer(customerId);
 

@@ -25,5 +25,15 @@ public class ExceptionHandlers {
         return new ResponseEntity<>(n.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler({DataNotPresentException.class})
+    public ResponseEntity<String> myMessage(DataNotPresentException n){
+        return new ResponseEntity<>(n.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({EmptyListException.class})
+    public ResponseEntity<String> myMessage(EmptyListException n){
+        return new ResponseEntity<>(n.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+
 
 }
