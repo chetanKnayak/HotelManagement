@@ -24,7 +24,7 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
      * @return
      */
     @GetMapping("/Customer")
-    public List<HotelManagement> getCustomers(){
+    public List<HotelManagement> getCustomers()throws EmptyListException{
         logger.info("Method Accessed");
         return this.serviceImp.getCustomers();
     }

@@ -16,7 +16,9 @@ public class Service implements ServiceImp {
     Validation validation;
 
     @Override
-    public List<HotelManagement> getCustomers() {
+    public List<HotelManagement> getCustomers() throws EmptyListException {
+        if (customerList.isEmpty())
+            throw new EmptyListException("List is Empty");
         return customerList;
     }
 
@@ -27,11 +29,11 @@ public class Service implements ServiceImp {
      * @throws NumberException
      */
     @Override
-    public String addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException {
+    public String addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException{
 
         uniqueCheck(hotelManagement.getCustomerNumber());
 
-                hotelManagement.setCustomerName(validation.validateName(hotelManagement.getCustomerName()));
+        hotelManagement.setCustomerName(validation.validateName(hotelManagement.getCustomerName()));
 
 
         hotelManagement.setCustomerNumber(validation.validateNumber(hotelManagement.getCustomerNumber()));
@@ -49,7 +51,7 @@ public class Service implements ServiceImp {
      */
     @Override
     public HotelManagement deletecustomer(int customerId) throws DataNotPresentException, EmptyListException {
-        if(customerList.isEmpty())
+        if (customerList.isEmpty())
             throw new EmptyListException("List is Empty");
         HotelManagement hotelManagement2 = null;
         for (HotelManagement hotelManagement : customerList)
@@ -57,9 +59,8 @@ public class Service implements ServiceImp {
                 hotelManagement2 = hotelManagement;
                 customerList.remove(hotelManagement);
                 break;
-            }
-        else
-            throw new DataNotPresentException("Given Customer ID does not exist");
+            } else
+                throw new DataNotPresentException("Given Customer ID does not exist");
         return hotelManagement2;
 
     }
@@ -94,9 +95,10 @@ public class Service implements ServiceImp {
 
         return hotelManagement2;
     }
+
     public void uniqueCheck(long customerNumber) throws DataAlreadyPresentException {
-        for (HotelManagement hotelM : getCustomers()){
-            if(hotelM.getCustomerNumber()==customerNumber)
+        for (HotelManagement hotelM : customerList) {
+            if (hotelM.getCustomerNumber() == customerNumber)
                 throw new DataAlreadyPresentException("Contact already present for Customer : " + hotelM.getCustomerName());
         }
     }

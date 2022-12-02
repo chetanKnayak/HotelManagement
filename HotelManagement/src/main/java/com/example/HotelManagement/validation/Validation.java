@@ -6,12 +6,16 @@ import com.example.HotelManagement.service.Service;
 import com.example.HotelManagement.service.ServiceImp;
 import org.springframework.stereotype.Component;
 
+import java.util.regex.Pattern;
+
 @Component
 public class Validation {
     ServiceImp service =new Service();
 
     public String validateName(String name) throws ValidDataException {
-      if ( name.length()<3)
+        String regex = "^[a-zA-Z ]*$";
+        Pattern validation = Pattern.compile(regex);
+      if (!(validation.matcher(name).matches() && name.length()>3))
         throw new ValidDataException("Enter valid Name");
       return name;
     }

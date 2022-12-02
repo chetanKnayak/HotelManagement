@@ -6,9 +6,9 @@ import com.example.HotelManagement.exception.*;
 import java.util.List;
 
 public interface ServiceImp {
-    List<HotelManagement> getCustomers();
+    List<HotelManagement> getCustomers() throws EmptyListException;
 
-     String addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException;
+     String addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException, EmptyListException;
 
 
 
