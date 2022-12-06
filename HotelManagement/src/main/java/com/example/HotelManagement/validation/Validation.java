@@ -19,26 +19,18 @@ public class Validation {
         throw new ValidDataException("Enter valid Name");
       return name;
     }
-
-
     /**
      *
      * @param number
      * @return
      */
-    public long validateNumber(long number) throws NumberException {
+    public String validateNumber(String number) throws NumberException {
+        Pattern validation = Pattern.compile("-?\\d+(\\.\\d+)?");
         String number1= String.valueOf(number);
+       if(!(validation.matcher(number1).matches()))
+           throw new NumberException("Enter 10 digit number without Alphabets..");
        if (number1.length()<10)
         throw new NumberException("enter 10 digit number");
-        return number;
+        return number1;
     }
-
-
-
-
-
-
-
-
-
 }

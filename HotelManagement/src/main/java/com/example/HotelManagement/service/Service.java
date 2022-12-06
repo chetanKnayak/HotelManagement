@@ -96,7 +96,7 @@ public class Service implements ServiceImp {
         return hotelManagement2;
     }
 
-    public void uniqueCheck(long customerNumber) throws DataAlreadyPresentException {
+    public void uniqueCheck(String customerNumber) throws DataAlreadyPresentException {
         for (HotelManagement hotelM : customerList) {
             if (hotelM.getCustomerNumber() == customerNumber)
                 throw new DataAlreadyPresentException("Contact already present for Customer : " + hotelM.getCustomerName());
