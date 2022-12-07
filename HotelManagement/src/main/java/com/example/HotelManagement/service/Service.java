@@ -31,7 +31,7 @@ public class Service implements ServiceImp {
     @Override
     public String addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException{
 
-        uniqueCheck(hotelManagement.getCustomerNumber());
+        uniqueCheck(hotelManagement.getCustomerNumber(),hotelManagement.getCustomerId());
 
         hotelManagement.setCustomerName(validation.validateName(hotelManagement.getCustomerName()));
 
@@ -83,6 +83,7 @@ public class Service implements ServiceImp {
                 hotelManagement1.setCustomerNumber(hotelManagement.getCustomerNumber());
                 hotelManagement1.setHotelName(hotelManagement.getHotelName());
                 hotelManagement1.setPaymentMethod(hotelManagement.getPaymentMethod());
+                hotelManagement1.setCustomerId(hotelManagement.getCustomerId());
                 hotelManagement2 = hotelManagement1;
                 // break;
             }
@@ -96,10 +97,12 @@ public class Service implements ServiceImp {
         return hotelManagement2;
     }
 
-    public void uniqueCheck(String customerNumber) throws DataAlreadyPresentException {
+    public void uniqueCheck(String customerNumber,int customerId) throws DataAlreadyPresentException {
         for (HotelManagement hotelM : customerList) {
-            if (hotelM.getCustomerNumber() == customerNumber)
+            if (hotelM.getCustomerNumber().equals(customerNumber))
                 throw new DataAlreadyPresentException("Contact already present for Customer : " + hotelM.getCustomerName());
+            if (hotelM.getCustomerId()==customerId)
+                throw new DataAlreadyPresentException("Id already present for Customer : " + hotelM.getCustomerName());
         }
     }
 
