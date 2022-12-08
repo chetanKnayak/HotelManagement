@@ -29,18 +29,15 @@ public class Service implements ServiceImp {
      * @throws NumberException
      */
     @Override
-    public String addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException{
+    public HotelManagement addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException{
 
         uniqueCheck(hotelManagement.getCustomerNumber(),hotelManagement.getCustomerId());
 
         hotelManagement.setCustomerName(validation.validateName(hotelManagement.getCustomerName()));
-
-
         hotelManagement.setCustomerNumber(validation.validateNumber(hotelManagement.getCustomerNumber()));
-
         customerList.add(hotelManagement);
 
-        return "customer added";
+        return hotelManagement;
 
     }
 
