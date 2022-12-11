@@ -1,6 +1,6 @@
 package com.example.HotelManagement.exception;
 
-public class NumberException  extends Exception{
+public class NumberException  extends RuntimeException{
 
 
     public NumberException(String str) {

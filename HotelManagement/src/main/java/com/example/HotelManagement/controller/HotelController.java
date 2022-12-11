@@ -8,6 +8,7 @@ import com.example.HotelManagement.service.ServiceImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,10 +30,10 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
         return this.serviceImp.getCustomers();
     }
 
-
+    @ResponseStatus(HttpStatus.CREATED)
    @PostMapping("/add")
 
-    public String addCustomer(@RequestBody HotelManagement hotelManagement) throws Exception{
+    public HotelManagement addCustomer(@RequestBody HotelManagement hotelManagement) throws Exception{
        logger.info("Post Method Accessed");
        return this.serviceImp.addCustomer(hotelManagement);
     }
