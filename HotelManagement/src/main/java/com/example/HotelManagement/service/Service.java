@@ -12,6 +12,10 @@ import java.util.List;
 public class Service implements ServiceImp {
 
     List<HotelManagement> customerList = new ArrayList<>();
+
+  /* public Service(){
+        customerList.add(new HotelManagement("taj",2,"chetan","1234567899","online"));
+    } */
     @Autowired
     Validation validation;
 
@@ -94,7 +98,7 @@ public class Service implements ServiceImp {
         return hotelManagement2;
     }
 
-    public void uniqueCheck(String customerNumber,int customerId) throws DataAlreadyPresentException {
+    public void uniqueCheck(Long customerNumber,int customerId) throws DataAlreadyPresentException {
         for (HotelManagement hotelM : customerList) {
             if (hotelM.getCustomerNumber().equals(customerNumber))
                 throw new DataAlreadyPresentException("Contact already present for Customer : " + hotelM.getCustomerName());

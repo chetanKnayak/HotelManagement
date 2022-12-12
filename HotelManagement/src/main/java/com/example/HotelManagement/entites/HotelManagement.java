@@ -7,7 +7,7 @@ public class HotelManagement {
     private int customerId;
 
     private String customerName;
-    private String customerNumber;
+    private Long customerNumber;
     private String paymentMethod;
 
     public String getHotelName() {
@@ -34,11 +34,11 @@ public class HotelManagement {
         this.customerName = customerName;
     }
 
-    public String getCustomerNumber() {
+    public Long getCustomerNumber() {
         return customerNumber;
     }
 
-    public void setCustomerNumber(String customerNumber) {
+    public void setCustomerNumber(Long customerNumber) {
         this.customerNumber = customerNumber;
     }
 
@@ -61,7 +61,7 @@ public class HotelManagement {
                 '}';
     }
 
-    public HotelManagement(String hotelName, int customerId, String customerName, String customerNumber, String paymentMethod) {
+    public HotelManagement(String hotelName, int customerId, String customerName, Long customerNumber, String paymentMethod) {
         this.hotelName = hotelName;
         this.customerId = customerId;
         this.customerName = customerName;

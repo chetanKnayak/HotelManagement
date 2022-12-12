@@ -24,13 +24,12 @@ public class Validation {
      * @param number
      * @return
      */
-    public String validateNumber(String number) throws NumberException {
-        Pattern validation = Pattern.compile("^\\d+$");
+    public Long validateNumber(Long number) throws NumberException {
+       // Pattern validation = Pattern.compile("^\\d+$");
         String number1= String.valueOf(number);
-       if(!(validation.matcher(number1).matches()))
-           throw new NumberException("Enter 10 digit Phone number containing [0-9]..");
+
        if (number1.length()<10)
         throw new NumberException("enter 10 digit number");
-        return number1;
+        return number;
     }
 }

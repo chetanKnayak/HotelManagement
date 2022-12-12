@@ -24,6 +24,7 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
      *
      * @return
      */
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/Customer")
     public List<HotelManagement> getCustomers()throws EmptyListException{
         logger.info("Method Accessed");
@@ -37,12 +38,14 @@ Logger logger= LoggerFactory.getLogger(HotelController.class);
        logger.info("Post Method Accessed");
        return this.serviceImp.addCustomer(hotelManagement);
     }
+    @ResponseStatus(HttpStatus.CREATED)
     @PutMapping("/Customer/{customerId}")
     public HotelManagement updatecustomer(@PathVariable int customerId,@RequestBody HotelManagement hotelManagement) throws Exception
     {
         logger.info("Put Method Accessed");
         return this.serviceImp.updatecustomer(customerId,hotelManagement);
     }
+    @ResponseStatus(HttpStatus.CREATED)
   @DeleteMapping("/delete/{customerId}")
     public HotelManagement deletecustomer(@PathVariable int customerId ) throws DataNotPresentException, EmptyListException {
        logger.info("Delete Method Accessed");
