@@ -16,5 +16,5 @@ public interface ServiceImp {
 
     HotelManagement updatecustomer(int customerId, HotelManagement hotelManagement) throws ValidDataException, NumberException;
 
-
+    public HotelManagement searchDataByGivenNumber(Long number)throws DataNotPresentException;
 }

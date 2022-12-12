@@ -1,8 +1,11 @@
 package com.example.HotelManagement.service;
 
+import com.example.HotelManagement.controller.HotelController;
 import com.example.HotelManagement.entites.HotelManagement;
 import com.example.HotelManagement.exception.*;
 import com.example.HotelManagement.validation.Validation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import java.util.List;
 public class Service implements ServiceImp {
 
     List<HotelManagement> customerList = new ArrayList<>();
-
+    Logger logger= LoggerFactory.getLogger(Service.class);
   /* public Service(){
         customerList.add(new HotelManagement("taj",2,"chetan","1234567899","online"));
     } */
@@ -34,7 +37,7 @@ public class Service implements ServiceImp {
      */
     @Override
     public HotelManagement addCustomer(HotelManagement hotelManagement) throws ValidDataException, NumberException, DataAlreadyPresentException{
-
+  logger.info("add Started");
         uniqueCheck(hotelManagement.getCustomerNumber(),hotelManagement.getCustomerId());
 
         hotelManagement.setCustomerName(validation.validateName(hotelManagement.getCustomerName()));
@@ -43,6 +46,15 @@ public class Service implements ServiceImp {
 
         return hotelManagement;
 
+    }
+    public HotelManagement searchDataByGivenNumber(Long number){
+        validation.validateNumber(number);
+        for (HotelManagement hotelManagement:customerList){
+            if (hotelManagement.getCustomerNumber()==number){
+                return hotelManagement;
+            }
+        }
+        throw new DataNotPresentException("data not present");
     }
 
 
@@ -99,11 +111,18 @@ public class Service implements ServiceImp {
     }
 
     public void uniqueCheck(Long customerNumber,int customerId) throws DataAlreadyPresentException {
+        logger.info("u Started");
         for (HotelManagement hotelM : customerList) {
-            if (hotelM.getCustomerNumber().equals(customerNumber))
+            if (hotelM.getCustomerNumber()==(customerNumber)){
+                logger.info("custN");
                 throw new DataAlreadyPresentException("Contact already present for Customer : " + hotelM.getCustomerName());
-            if (hotelM.getCustomerId()==customerId)
+            }
+
+            if (hotelM.getCustomerId()==customerId){
+                logger.info("id");
                 throw new DataAlreadyPresentException("Id already present for Customer : " + hotelM.getCustomerName());
+            }
+
         }
     }
 

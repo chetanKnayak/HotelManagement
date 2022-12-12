@@ -2,33 +2,21 @@ package com.example.HotelManagement;
 
 import com.example.HotelManagement.entites.HotelManagement;
 import com.example.HotelManagement.exception.DataAlreadyPresentException;
-import com.example.HotelManagement.exception.EmptyListException;
 import com.example.HotelManagement.exception.NumberException;
 import com.example.HotelManagement.exception.ValidDataException;
 import com.example.HotelManagement.service.Service;
 import com.example.HotelManagement.service.ServiceImp;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -38,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class HotelManagementApplicationTests {
 	HotelManagement hotelManagement;
 	@Autowired
-	Service service;
+	ServiceImp service;
 
 	@Autowired
 	MockMvc mockMvc;
@@ -62,23 +50,25 @@ class HotelManagementApplicationTests {
 	@Test
 	void testAddCustomerData() {
 		HotelManagement actual = service.addCustomer(hotelManagement);
-		assertEquals(hotelManagement.getCustomerName(), actual.getCustomerName());
+		HotelManagement expected = service.searchDataByGivenNumber(hotelManagement.getCustomerNumber());
+		assertEquals(expected, actual);
 		assertThrows(Exception.class, () -> service.addCustomer(hotelManagement));
 	}
 
 	@Order(2)
 	@Test
 	void testDataAlreadyPresentForAdd() {
-		hotelManagement.setCustomerNumber(5432167890L);
+
 		hotelManagement.setCustomerId(3);
 		service.addCustomer(hotelManagement);
-		assertThrows(DataAlreadyPresentException.class, () -> service.addCustomer(hotelManagement), "Contact already present for Customer :");
+
+		assertThrows(DataAlreadyPresentException.class, () -> service.addCustomer(hotelManagement), "Contact already present for Customer : ");
 	}
 
 	@Order(3)
 	@Test
 	void testInvalidNameDataForAdd() {
-		hotelManagement.setCustomerName("ni");
+		hotelManagement.setCustomerName("nj");
 		hotelManagement.setCustomerId(11);
 		hotelManagement.setCustomerNumber(1234456789L);
 		assertThrows(ValidDataException.class, () -> service.addCustomer(hotelManagement));
@@ -96,7 +86,7 @@ class HotelManagementApplicationTests {
 	@Test
 	void testPostController() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		hotelManagement.setCustomerNumber(1234567899L);
+		hotelManagement.setCustomerNumber(1234567789L);
 		hotelManagement.setCustomerId(16);
 		this.mockMvc.perform(post("/add")
 						.contentType(MediaType.APPLICATION_JSON)
@@ -110,25 +100,35 @@ class HotelManagementApplicationTests {
 	void testPutController() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 
-	   hotelManagement.setCustomerName("chetan");
-	   hotelManagement.setHotelName("grand");
-	   hotelManagement.setPaymentMethod("offline");
+		hotelManagement.setCustomerName("chetan");
+		hotelManagement.setHotelName("grand");
+		hotelManagement.setPaymentMethod("offline");
 		this.mockMvc.perform(put("/Customer/2")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(hotelManagement)))
 				.andExpect(status().isCreated());
 	}
+
 	/*@Order(7)
 	@Test
 	void testdeleteController() throws Exception {
 
 		ObjectMapper mapper = new ObjectMapper();
-		hotelManagement.setCustomerId(2);
+		hotelManagement.getCustomerId();
 		this.mockMvc.perform(delete("/delete/2")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(hotelManagement)))
 				.andExpect(status().isCreated());
-	}
-*/
-}
+	}*/
+	@Order(7)
+	@Test
+	void testGetController() throws Exception {
+		hotelManagement.setCustomerNumber(1234567899L);
+		hotelManagement.setCustomerId(5);
+		service.addCustomer(hotelManagement);
+		this.mockMvc.perform(get("/Customer")
+				.contentType(MediaType.APPLICATION_JSON));
 
+	}
+
+}
