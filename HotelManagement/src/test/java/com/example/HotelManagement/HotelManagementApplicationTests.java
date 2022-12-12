@@ -7,6 +7,7 @@ import com.example.HotelManagement.exception.NumberException;
 import com.example.HotelManagement.exception.ValidDataException;
 import com.example.HotelManagement.service.Service;
 import com.example.HotelManagement.service.ServiceImp;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
@@ -37,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class HotelManagementApplicationTests {
 	HotelManagement hotelManagement;
 	@Autowired
-	ServiceImp service;
+	Service service;
 
 	@Autowired
 	MockMvc mockMvc;
@@ -96,25 +97,38 @@ class HotelManagementApplicationTests {
 	void testPostController() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		hotelManagement.setCustomerNumber(1234567899L);
-		hotelManagement.setCustomerId(15);
+		hotelManagement.setCustomerId(16);
 		this.mockMvc.perform(post("/add")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(hotelManagement)))
 				.andExpect(status().isCreated());
 	}
 
-/*	@Order(6)
+
+	@Order(6)
 	@Test
-	void testdeleteController() throws Exception {
-		Mockito.when(service.deletecustomer(2)).thenReturn(hotelManagement);
+	void testPutController() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		hotelManagement.setCustomerId(2);
-		this.mockMvc.perform(delete("/delete/{customerId}")
+
+	   hotelManagement.setCustomerName("chetan");
+	   hotelManagement.setHotelName("grand");
+	   hotelManagement.setPaymentMethod("offline");
+		this.mockMvc.perform(put("/Customer/2")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(hotelManagement)))
-				.andExpect(status().isCreated());*/
-
+				.andExpect(status().isCreated());
 	}
+	/*@Order(7)
+	@Test
+	void testdeleteController() throws Exception {
 
-
+		ObjectMapper mapper = new ObjectMapper();
+		hotelManagement.setCustomerId(2);
+		this.mockMvc.perform(delete("/delete/2")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(mapper.writeValueAsString(hotelManagement)))
+				.andExpect(status().isCreated());
+	}
+*/
+}
 
