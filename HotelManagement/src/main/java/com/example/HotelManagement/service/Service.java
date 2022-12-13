@@ -16,9 +16,9 @@ public class Service implements ServiceImp {
 
     List<HotelManagement> customerList = new ArrayList<>();
     Logger logger= LoggerFactory.getLogger(Service.class);
-  /* public Service(){
-        customerList.add(new HotelManagement("taj",2,"chetan","1234567899","online"));
-    } */
+  /*public Service(){
+        customerList.add(new HotelManagement("taj",34,"chetan",1234567899L,"online"));
+    }*/
     @Autowired
     Validation validation;
 
@@ -45,7 +45,6 @@ public class Service implements ServiceImp {
         customerList.add(hotelManagement);
 
         return hotelManagement;
-
     }
     public HotelManagement searchDataByGivenNumber(Long number){
         validation.validateNumber(number);
@@ -98,7 +97,7 @@ public class Service implements ServiceImp {
                 hotelManagement1.setPaymentMethod(hotelManagement.getPaymentMethod());
                 hotelManagement1.setCustomerId(hotelManagement.getCustomerId());
                 hotelManagement2 = hotelManagement1;
-                // break;
+
             }
 
 

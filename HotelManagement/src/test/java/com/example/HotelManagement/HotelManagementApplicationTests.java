@@ -1,9 +1,7 @@
 package com.example.HotelManagement;
 
 import com.example.HotelManagement.entites.HotelManagement;
-import com.example.HotelManagement.exception.DataAlreadyPresentException;
-import com.example.HotelManagement.exception.NumberException;
-import com.example.HotelManagement.exception.ValidDataException;
+import com.example.HotelManagement.exception.*;
 import com.example.HotelManagement.service.Service;
 import com.example.HotelManagement.service.ServiceImp;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,12 +38,11 @@ class HotelManagementApplicationTests {
 	public void setUpObject() {
 		hotelManagement = new HotelManagement();
 		hotelManagement.setHotelName("Taj A");
-		hotelManagement.setCustomerId(2);
-		hotelManagement.setCustomerName("Nikunj");
-		hotelManagement.setCustomerNumber(2234567899L);
+		hotelManagement.setCustomerId(4);
+		hotelManagement.setCustomerName("chetan");
+		hotelManagement.setCustomerNumber(1234567899L);
 		hotelManagement.setPaymentMethod("online");
 	}
-
 	@Order(1)
 	@Test
 	void testAddCustomerData() {
@@ -55,20 +52,21 @@ class HotelManagementApplicationTests {
 		assertThrows(Exception.class, () -> service.addCustomer(hotelManagement));
 	}
 
+
+
 	@Order(2)
 	@Test
-	void testDataAlreadyPresentForAdd() {
+	void testDeleteById() {
+		//service.addCustomer(hotelManagement);
+		assertThrows(DataNotPresentException.class, () -> service.deletecustomer(6));
 
-		hotelManagement.setCustomerId(3);
-		service.addCustomer(hotelManagement);
-
-		assertThrows(DataAlreadyPresentException.class, () -> service.addCustomer(hotelManagement), "Contact already present for Customer : ");
 	}
+
 
 	@Order(3)
 	@Test
 	void testInvalidNameDataForAdd() {
-		hotelManagement.setCustomerName("nj");
+		hotelManagement.setCustomerName("ck");
 		hotelManagement.setCustomerId(11);
 		hotelManagement.setCustomerNumber(1234456789L);
 		assertThrows(ValidDataException.class, () -> service.addCustomer(hotelManagement));
@@ -109,18 +107,15 @@ class HotelManagementApplicationTests {
 				.andExpect(status().isCreated());
 	}
 
-	/*@Order(7)
+	@Order(7)
 	@Test
 	void testdeleteController() throws Exception {
 
-		ObjectMapper mapper = new ObjectMapper();
-		hotelManagement.getCustomerId();
-		this.mockMvc.perform(delete("/delete/2")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(mapper.writeValueAsString(hotelManagement)))
-				.andExpect(status().isCreated());
-	}*/
-	@Order(7)
+		this.mockMvc.perform(delete("/delete/4")
+						.contentType(MediaType.APPLICATION_JSON));
+
+	}
+	@Order(8)
 	@Test
 	void testGetController() throws Exception {
 		hotelManagement.setCustomerNumber(1234567899L);
